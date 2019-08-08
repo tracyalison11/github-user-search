@@ -8,7 +8,7 @@
       height="87px"
       width="100px" />
       <input id="search-input" type="text" placeholder="looking for someone?" v-on:keyup="searchForGitHubUsers"/>
-
+      <p v-if="loaded">Total search results: {{this.totalResults}}</p>
       <div v-for="user in users">
         {{user}}
       </div>
@@ -24,7 +24,9 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      users: []
+      users: [],
+      totalResults: 0,
+      loaded: false
     }
   },
   props: {
@@ -41,8 +43,10 @@ export default {
           q: searchValue
         }
       }).then((response) => {
-        console.log(response.data.items);
+        this.loaded = true;
+        console.log(response);
         this.users = response.data.items;
+        this.totalResults = response.data.total_count;
       })
     }
   }
