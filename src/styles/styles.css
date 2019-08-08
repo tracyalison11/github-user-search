@@ -1,13 +1,33 @@
+body {
+  background-color: #fff6da;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #FF1493;
+  color: #042f4b;
   margin-top: 60px;
 }
 
 #search-input {
   border-radius: 0;
 border-width: 0 0 1px;
+}
+
+.avatar {
+  width: 4em;
+}
+
+tr {
+  color: #007bff;
+}
+
+tbody > tr {
+  cursor: pointer;
+}
+
+tbody > tr:hover {
+  background-color: #4dcfff;
 }

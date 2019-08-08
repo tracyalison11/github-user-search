@@ -1,36 +1,41 @@
 <template>
   <div class="hello">
-    <!-- <h1>{{ msg }}</h1> -->
-
     <img
       src="../assets/search-icon.svg"
       alt="magnifying glass"
       height="87px"
       width="100px" />
       <input id="search-input" type="text" placeholder="looking for someone?" v-on:keyup="searchForGitHubUsers"/>
+      <p v-if="error && !loaded">An error occurred during search. You may have exceeded the rate limit. Please try again.</p>
       <p v-if="loaded">Total search results: {{this.totalResults}}</p>
 
-      <b-table
-        id="my-table"
-        :items="users"
-        :per-page="perPage"
-        :current-page="currentPage"
-        small
-      ></b-table>
-
-      <div class="overflow-auto">
-        <b-pagination
-          v-model="currentPage"
-          :total-rows="rows"
-          :per-page="perPage"
-          aria-controls="my-table"
-        ></b-pagination>
-
+      <div class="search-results-table" v-if="loaded">
         <p class="mt-3">Current Page: {{ currentPage }}</p>
+        <b-table
+          id="my-table"
+          :items="users"
+          :fields="fields"
+          :per-page="perPage"
+          @row-clicked="rowClicked"
+          :current-page="currentPage"
+          small
+        >
+          <!-- A virtual column to show avatar -->
+          <template slot="Avatar" slot-scope="data">
+            <img class="avatar" :src="`${data.item.avatar_url}`" />
+          </template>
+        </b-table>
+        <div class="overflow-auto">
+          <b-pagination
+            v-model="currentPage"
+            :total-rows="rows"
+            :per-page="perPage"
+            aria-controls="my-table"
+            align="fill"
+          ></b-pagination>
+        </div>
       </div>
-
     </div>
-
 </template>
 
 <script>
@@ -41,10 +46,13 @@ export default {
   data () {
     return {
       users: [],
+      fields: ['Avatar', {key: 'login', label: 'Username'}, {key: 'id', label: 'User ID'}, {key: 'html_url', label: 'Profile URL'}, 'starred_url', 'score'],
       totalResults: 0,
       perPage: 10,
       currentPage: 1,
-      loaded: false
+      loaded: false,
+      error: false,
+      imageURL: ''
     }
   },
   props: {
@@ -62,10 +70,15 @@ export default {
         }
       }).then((response) => {
         this.loaded = true;
-        console.log(response);
         this.users = response.data.items;
         this.totalResults = response.data.total_count;
-      })
+      }, (response) => {
+        this.loaded = false;
+        this.error = true;
+      });
+    },
+    rowClicked: function(row) {
+      window.location.href = row.html_url;
     }
   },
   computed: {
