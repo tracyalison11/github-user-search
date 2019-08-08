@@ -9,8 +9,24 @@
       width="100px" />
       <input id="search-input" type="text" placeholder="looking for someone?" v-on:keyup="searchForGitHubUsers"/>
       <p v-if="loaded">Total search results: {{this.totalResults}}</p>
-      <div v-for="user in users">
-        {{user}}
+
+      <b-table
+        id="my-table"
+        :items="users"
+        :per-page="perPage"
+        :current-page="currentPage"
+        small
+      ></b-table>
+
+      <div class="overflow-auto">
+        <b-pagination
+          v-model="currentPage"
+          :total-rows="users"
+          :per-page="perPage"
+          aria-controls="my-table"
+        ></b-pagination>
+
+        <p class="mt-3">Current Page: {{ currentPage }}</p>
       </div>
 
     </div>
@@ -26,6 +42,8 @@ export default {
     return {
       users: [],
       totalResults: 0,
+      perPage: 10,
+      currentPage: 1,
       loaded: false
     }
   },
