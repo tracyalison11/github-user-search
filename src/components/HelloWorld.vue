@@ -8,6 +8,11 @@
       height="87px"
       width="100px" />
       <input id="search-input" type="text" placeholder="looking for someone?" v-on:keyup="searchForGitHubUsers"/>
+
+      <div v-for="user in users">
+        {{user}}
+      </div>
+
     </div>
 
 </template>
@@ -17,6 +22,11 @@ import axios from 'axios';
 
 export default {
   name: 'HelloWorld',
+  data () {
+    return {
+      users: []
+    }
+  },
   props: {
     msg: String
   },
@@ -31,7 +41,8 @@ export default {
           q: searchValue
         }
       }).then((response) => {
-        console.log(response.data)
+        console.log(response.data.items);
+        this.users = response.data.items;
       })
     }
   }
