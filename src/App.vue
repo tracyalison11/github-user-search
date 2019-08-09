@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <HelloWorld/>
+    <UserSearch/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import UserSearch from './components/UserSearch.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    UserSearch
   }
 }
 </script>

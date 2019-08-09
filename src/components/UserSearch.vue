@@ -44,7 +44,7 @@
 import axios from 'axios';
 
 export default {
-  name: 'HelloWorld',
+  name: 'UserSearch',
   data () {
     return {
       isActive: false,
