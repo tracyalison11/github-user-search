@@ -6,6 +6,20 @@
   font-family: 'Roboto', sans-serif;
 }
 
+/* Empty Screen CSS */
+
+.empty-screen {
+  margin: 10em;
+}
+
+.inspectocat {
+  width: 10em;
+}
+
+.directions {
+  font-family: 'Staatliches', cursive;
+}
+
 /* Searchbar CSS */
 
 .search-circle {
