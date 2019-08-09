@@ -75,7 +75,7 @@ export default {
           this.loaded = true;
           this.users = response.data.items;
           this.totalResults = response.data.total_count;
-        }, (response) => {
+        }, () => {
           this.loaded = false;
           this.error = true;
         });
