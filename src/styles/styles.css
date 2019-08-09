@@ -49,15 +49,18 @@ tbody > tr {
 .search-input {
   border-radius: 0;
   border-width: 0 0 1px;
-  border-bottom: solid 1px;
+  border-bottom: #ffdcf7;
   background-color: #ffdcf7;
   width: 0;
+  transition-property: width, border-bottom;
   -webkit-transition: ease-in 1s;
   transition: ease-out 1s;
 }
 
 .search-input.active {
   width: 240px;
+  border-bottom: solid 1px;
+  transition-property: width, border-bottom;
   -webkit-transition: ease-out 1s;
   transition: ease-out 1s;
 }
