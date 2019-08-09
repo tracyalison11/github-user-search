@@ -47,7 +47,6 @@ export default {
   name: 'UserSearch',
   data () {
     return {
-      isActive: false,
       users: [],
       fields: ['Avatar', {key: 'login', label: 'Username'}, {key: 'id', label: 'User ID'}, {key: 'html_url', label: 'Profile URL'}],
       totalResults: 0,
@@ -55,12 +54,9 @@ export default {
       currentPage: 1,
       loaded: false,
       error: false,
-      imageURL: ''
+      isActive: false
     }
-  },
-  props: {
-    msg: String
-  },
+  }
   methods: {
     searchForGitHubUsers: function() {
       var searchElement = $('.search-input');
