@@ -2,24 +2,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #042f4b;
   margin-top: 60px;
-}
-
-tr {
   font-family: 'Roboto', sans-serif;
-  transition: ease-out 1s;
-  background-color: #ffffff;
 }
 
-tr:hover {
-  background-color: #9cf196;
-  transition: ease-in 1s;
-}
-
-tbody > tr {
-  cursor: pointer;
-}
+/* Searchbar CSS */
 
 .search-circle {
   width: 4em;
@@ -27,16 +14,12 @@ tbody > tr {
   display: inline-block;
   background-color: #ffdcf7;
   box-shadow: 2px 3px 14px 3px rgba(0,0,0,0.45);
-  -moz-box-shadow: 2px 3px 14px 3px rgba(0,0,0,0.45);
-  -webkit-box-shadow: 2px 3px 14px 3px rgba(0,0,0,0.45);
   border-radius:100px;
-  -webkit-transition: ease-in 1s;
   transition: ease-out 1s;
 }
 
 .search-circle.active {
   width: 20em;
-  -webkit-transition: ease-out 1s;
   transition: ease-out 1s;
 }
 
@@ -53,7 +36,6 @@ tbody > tr {
   background-color: #ffdcf7;
   width: 0;
   transition-property: width, border-bottom;
-  -webkit-transition: ease-in 1s;
   transition: ease-out 1s;
 }
 
@@ -61,7 +43,6 @@ tbody > tr {
   width: 240px;
   border-bottom: solid 1px;
   transition-property: width, border-bottom;
-  -webkit-transition: ease-out 1s;
   transition: ease-out 1s;
 }
 
@@ -86,6 +67,8 @@ tbody > tr {
   color: #000;
 }
 
+/* Search Results and Error CSS */
+
 .search-results-info {
   font-family: 'Roboto', sans-serif;
   margin: 2em;
@@ -93,6 +76,13 @@ tbody > tr {
 
 .error {
   color: #ed1250;
+}
+
+/* Table CSS */
+
+tbody > tr:hover {
+  cursor: pointer;
+  background-color: #dcf7ff;
 }
 
 .avatar {
