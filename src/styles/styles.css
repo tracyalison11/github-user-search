@@ -54,7 +54,7 @@
 }
 
 .search-input.active {
-  width: 240px;
+  width: 15em;
   border-bottom: solid 1px;
   transition-property: width, border-bottom;
   transition: ease-out 1s;
