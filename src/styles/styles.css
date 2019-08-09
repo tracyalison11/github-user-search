@@ -1,36 +1,76 @@
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #042f4b;
   margin-top: 60px;
-  background-color: #b6ffea;
+}
+
+.search-circle {
+  width: 4em;
+  height: 4em;
+  display: inline-block;
+  background-color: #ffdcf7;
+  box-shadow: 2px 3px 14px 3px rgba(0,0,0,0.45);
+  -moz-box-shadow: 2px 3px 14px 3px rgba(0,0,0,0.45);
+  -webkit-box-shadow: 2px 3px 14px 3px rgba(0,0,0,0.45);
+  border-radius:100px;
+  -webkit-transition: ease-in 1s;
+  transition: ease-out 1s;
+}
+
+.search-circle.active {
+  width: 20em;
+  -webkit-transition: ease-out 1s;
+  transition: ease-out 1s;
 }
 
 .search-icon {
   cursor: pointer;
-  height: 6.25em;
-  width: 5.5em;
+  height: 4em;
+  width: 3em;
 }
 
 .search-input {
   border-radius: 0;
   border-width: 0 0 1px;
-  background-color: none;
+  border-bottom: solid 1px;
+  background-color: #ffdcf7;
   width: 0;
   -webkit-transition: ease-in 1s;
   transition: ease-out 1s;
 }
 
 .search-input.active {
-  width: 200px;
+  width: 240px;
   -webkit-transition: ease-out 1s;
   transition: ease-out 1s;
 }
 
-.search-inpu:focus {
+.search-input:focus {
   outline: 0;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-family: 'Staatliches', cursive;
+  color: #000;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  font-family: 'Staatliches', cursive;
+  color: #000;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  font-family: 'Staatliches', cursive;
+  color: #000;
+}
+:-moz-placeholder { /* Firefox 18- */
+  font-family: 'Staatliches', cursive;
+  color: #000;
+}
+
+.search-results-info {
+  font-family: 'Roboto', sans-serif;
+  margin: 2em;
 }
 
 .avatar {
@@ -38,7 +78,7 @@
 }
 
 tr {
-  color: #007bff;
+  font-family: 'Roboto', sans-serif;
 }
 
 tbody > tr {
@@ -46,5 +86,5 @@ tbody > tr {
 }
 
 tbody > tr:hover {
-  background-color: #4dcfff;
+  background-color: #b2fcff;
 }

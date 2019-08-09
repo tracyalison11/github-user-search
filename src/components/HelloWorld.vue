@@ -1,15 +1,27 @@
 <template>
   <div class="hello">
     <div class="search-box">
-      <img src="../assets/search-icon.svg" class="search-icon" alt="magnifying glass" @mouseover="showInput"/>
+      <div class="search-circle" v-bind:class="{ active: isActive }">
+        <img src="../assets/search-icon.svg" class="search-icon" alt="magnifying glass" @mouseover="showInput"/>
         <input class="search-input" v-bind:class="{ active: isActive }" type="text" placeholder="looking for someone?" v-on:keyup="searchForGitHubUsers"/>
+        <span></span>
+      </div>
     </div>
 
-      <p v-if="error && !loaded">An error occurred during search. You may have exceeded the rate limit. Please try again.</p>
-      <p v-if="loaded">Total search results: {{this.totalResults}}</p>
+      <div v-if="error && !loaded">An error occurred during search. You may have exceeded the rate limit. Please try again.</div>
+      <p class="search-results-info" v-if="loaded">Total search results: {{Number(this.totalResults).toLocaleString()}}</p>
 
       <div class="search-results-table" v-if="loaded">
-        <p class="mt-3">Current Page: {{ currentPage }}</p>
+        <p class="search-results-info">Current Page: {{ currentPage }}</p>
+        <div class="overflow-auto">
+          <b-pagination
+            v-model="currentPage"
+            :total-rows="rows"
+            :per-page="perPage"
+            aria-controls="my-table"
+            align="center"
+          ></b-pagination>
+        </div>
         <b-table
           id="my-table"
           :items="users"
@@ -17,6 +29,7 @@
           :per-page="perPage"
           @row-clicked="rowClicked"
           :current-page="currentPage"
+          :borderless="borderless"
           small
         >
           <!-- A virtual column to show avatar -->
@@ -24,15 +37,6 @@
             <img class="avatar" :src="`${data.item.avatar_url}`" />
           </template>
         </b-table>
-        <div class="overflow-auto">
-          <b-pagination
-            v-model="currentPage"
-            :total-rows="rows"
-            :per-page="perPage"
-            aria-controls="my-table"
-            align="fill"
-          ></b-pagination>
-        </div>
       </div>
     </div>
 </template>
@@ -46,12 +50,13 @@ export default {
     return {
       isActive: false,
       users: [],
-      fields: ['Avatar', {key: 'login', label: 'Username'}, {key: 'id', label: 'User ID'}, {key: 'html_url', label: 'Profile URL'}, 'score'],
+      fields: ['Avatar', {key: 'login', label: 'Username'}, {key: 'id', label: 'User ID'}, {key: 'html_url', label: 'Profile URL'}],
       totalResults: 0,
       perPage: 10,
       currentPage: 1,
       loaded: false,
       error: false,
+      borderless: true,
       imageURL: ''
     }
   },
