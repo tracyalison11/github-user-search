@@ -1,11 +1,10 @@
 <template>
   <div class="hello">
-    <img
-      src="../assets/search-icon.svg"
-      alt="magnifying glass"
-      height="87px"
-      width="100px" />
-      <input id="search-input" type="text" placeholder="looking for someone?" v-on:keyup="searchForGitHubUsers"/>
+    <div class="search-box">
+      <img src="../assets/search-icon.svg" class="search-icon" alt="magnifying glass" @mouseover="showInput"/>
+        <input class="search-input" v-bind:class="{ active: isActive }" type="text" placeholder="looking for someone?" v-on:keyup="searchForGitHubUsers"/>
+    </div>
+
       <p v-if="error && !loaded">An error occurred during search. You may have exceeded the rate limit. Please try again.</p>
       <p v-if="loaded">Total search results: {{this.totalResults}}</p>
 
@@ -45,8 +44,9 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
+      isActive: false,
       users: [],
-      fields: ['Avatar', {key: 'login', label: 'Username'}, {key: 'id', label: 'User ID'}, {key: 'html_url', label: 'Profile URL'}, 'starred_url', 'score'],
+      fields: ['Avatar', {key: 'login', label: 'Username'}, {key: 'id', label: 'User ID'}, {key: 'html_url', label: 'Profile URL'}, 'score'],
       totalResults: 0,
       perPage: 10,
       currentPage: 1,
@@ -60,25 +60,29 @@ export default {
   },
   methods: {
     searchForGitHubUsers: function() {
-      var searchElement = $('#search-input');
+      var searchElement = $('.search-input');
       var searchValue = searchElement.val();
-      searchValue = searchValue.toString();
 
-      axios.get('https://api.github.com/search/users', {
-        params: {
-          q: searchValue
-        }
-      }).then((response) => {
-        this.loaded = true;
-        this.users = response.data.items;
-        this.totalResults = response.data.total_count;
-      }, (response) => {
-        this.loaded = false;
-        this.error = true;
-      });
+      if (searchValue) {
+        axios.get('https://api.github.com/search/users', {
+          params: {
+            q: searchValue
+          }
+        }).then((response) => {
+          this.loaded = true;
+          this.users = response.data.items;
+          this.totalResults = response.data.total_count;
+        }, (response) => {
+          this.loaded = false;
+          this.error = true;
+        });
+      }
     },
     rowClicked: function(row) {
       window.location.href = row.html_url;
+    },
+    showInput: function() {
+      this.isActive = !this.isActive;
     }
   },
   computed: {

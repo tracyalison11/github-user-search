@@ -1,7 +1,3 @@
-body {
-  background-color: #fff6da;
-}
-
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -9,11 +5,32 @@ body {
   text-align: center;
   color: #042f4b;
   margin-top: 60px;
+  background-color: #b6ffea;
 }
 
-#search-input {
+.search-icon {
+  cursor: pointer;
+  height: 6.25em;
+  width: 5.5em;
+}
+
+.search-input {
   border-radius: 0;
-border-width: 0 0 1px;
+  border-width: 0 0 1px;
+  background-color: none;
+  width: 0;
+  -webkit-transition: ease-in 1s;
+  transition: ease-out 1s;
+}
+
+.search-input.active {
+  width: 200px;
+  -webkit-transition: ease-out 1s;
+  transition: ease-out 1s;
+}
+
+.search-inpu:focus {
+  outline: 0;
 }
 
 .avatar {
