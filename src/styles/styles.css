@@ -6,6 +6,21 @@
   margin-top: 60px;
 }
 
+tr {
+  font-family: 'Roboto', sans-serif;
+  transition: ease-out 1s;
+  background-color: #ffffff;
+}
+
+tr:hover {
+  background-color: #9cf196;
+  transition: ease-in 1s;
+}
+
+tbody > tr {
+  cursor: pointer;
+}
+
 .search-circle {
   width: 4em;
   height: 4em;
@@ -73,18 +88,10 @@
   margin: 2em;
 }
 
+.error {
+  color: #ed1250;
+}
+
 .avatar {
   width: 4em;
-}
-
-tr {
-  font-family: 'Roboto', sans-serif;
-}
-
-tbody > tr {
-  cursor: pointer;
-}
-
-tbody > tr:hover {
-  background-color: #b2fcff;
 }

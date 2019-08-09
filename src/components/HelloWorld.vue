@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="search">
     <div class="search-box">
       <div class="search-circle" v-bind:class="{ active: isActive }">
         <img src="../assets/search-icon.svg" class="search-icon" alt="magnifying glass" @mouseover="showInput"/>
@@ -8,7 +8,7 @@
       </div>
     </div>
 
-      <div v-if="error && !loaded">An error occurred during search. You may have exceeded the rate limit. Please try again.</div>
+      <p class="search-results-info error" v-if="error && !loaded">An error occurred during search. You may have exceeded the rate limit. Please try again.</p>
       <p class="search-results-info" v-if="loaded">Total search results: {{Number(this.totalResults).toLocaleString()}}</p>
 
       <div class="search-results-table" v-if="loaded">
@@ -29,7 +29,6 @@
           :per-page="perPage"
           @row-clicked="rowClicked"
           :current-page="currentPage"
-          :borderless="borderless"
           small
         >
           <!-- A virtual column to show avatar -->
@@ -56,7 +55,6 @@ export default {
       currentPage: 1,
       loaded: false,
       error: false,
-      borderless: true,
       imageURL: ''
     }
   },
